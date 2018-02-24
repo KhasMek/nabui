@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    {% if endpoints_new %}
+    <h2>New Endpoints</h2>
+    <div id="endpoints-new">
+        <table class="table table-striped table-bordered table-hover text-center">
+            <tr>
+                <th scope="col" class="text-center">MAC Address</th>
+                <th scope="col" class="text-center">Hostname</th>
+                <th scope="col" class="text-center">IPv4</th>
+                <th scope="col" class="text-center">IPv6</th>
+                <th scope="col" class="text-center">Alias</th>
+                <th scope="col" class="text-center">Vendor</th>
+                <th scope="col" class="text-center">First Seen</th>
+            </tr>
+        {% for endpoint in endpoints_new %}
+            <tr>
+                <td scope="row">{{ endpoint['data']['mac'] }}</td>
+                <td>{{ endpoint['data']['hostname'] }}</td>
+                <td>{{ endpoint['data']['ipv4'] }}</td>
+                <td>{{ endpoint['data']['ipv6'] }}</td>
+                <td>{{ endpoint['data']['alias'] }}</td>
+                <td>{{ endpoint['data']['vendor'] }}</td>
+                <td>{{ endpoint['data']['first_seen'] }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <hr>
+    {% endif %}
+    {% if endpoints_lost %}
+    <h2>Lost Endpoints</h2>
+    <div id="endpoints-lost">
+        <table class="table table-striped table-bordered table-hover text-center">
+            <tr>
+                <th scope="col" class="text-center">MAC Address</th>
+                <th scope="col" class="text-center">Hostname</th>
+                <th scope="col" class="text-center">IPv4</th>
+                <th scope="col" class="text-center">IPv6</th>
+                <th scope="col" class="text-center">Alias</th>
+                <th scope="col" class="text-center">Vendor</th>
+                <th scope="col" class="text-center">First Seen</th>
+            </tr>
+        {% for endpoint in endpoints_lost %}
+            <tr>
+                <td scope="row">{{ endpoint['data']['mac'] }}</td>
+                <td>{{ endpoint['data']['hostname'] }}</td>
+                <td>{{ endpoint['data']['ipv4'] }}</td>
+                <td>{{ endpoint['data']['ipv6'] }}</td>
+                <td>{{ endpoint['data']['alias'] }}</td>
+                <td>{{ endpoint['data']['vendor'] }}</td>
+                <td>{{ endpoint['data']['first_seen'] }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <hr>
+    {% endif %}
+    {% if logs %}
+    <h2>Log Events</h2>
+    {% for log in logs %}
+        {% if log['data']['Level'] == 1 %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <h4 class="alert-heading">Success</h4>
+        {% elif log['data']['Level'] == 2 %}
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <h4 class="alert-heading">Info</h4>
+        {% elif log['data']['Level'] == 3 %}
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <h4 class="alert-heading">Warning</h4>
+        {% elif log['data']['Level'] == 4 %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <h4 class="alert-heading">Error</h4>
+        {% endif %}
+            <p>{{ log['data']['Message'] }}</p>
+            <hr>
+            <p class="mb-0">{{ log['time'] }}</p>
+        </div>
+    {% endfor %}
+    <hr>
+    {% endif %}
+{% endblock %}

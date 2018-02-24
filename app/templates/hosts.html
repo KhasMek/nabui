@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <h2>Hosts</h2>
+    <div id="hosts">
+        <table class="table table-striped table-bordered table-hover text-center">
+            <tr>
+                <th scope="col" class="text-center">MAC Address</th>
+                <th scope="col" class="text-center">Hostname</th>
+                <th scope="col" class="text-center">IPv4</th>
+                <th scope="col" class="text-center">IPv6</th>
+                <th scope="col" class="text-center">Alias</th>
+                <th scope="col" class="text-center">Vendor</th>
+                <th scope="col" class="text-center">First Seen</th>
+                <th scope="col" class="text-center">Last Seen</th>
+            </tr>
+            {% for host in hosts %}
+            <tr>
+                <td scope="row">{{ host['mac'] }}</td>
+                <td>{{ host['hostname'] }}</td>
+                <td>{{ host['ipv4'] }}</td>
+                <td>{{ host['ipv6'] }}</td>
+                <td>{{ host['alias'] }}</td>
+                <td>{{ host['vendor'] }}</td>
+                <td>{{ host['first_seen'] }}</td>
+                <td>{{ host['last_seen'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <script>
+        setInterval(function(){
+            $('#hosts').load('/hosts');
+        }, 2000);
+    </script>
+{% endblock %}
