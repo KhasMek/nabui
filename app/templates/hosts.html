@@ -30,8 +30,9 @@
         </table>
     </div>
     <script>
+        var pollRate = '{{ config.NABUI_POLL_RATE }}' * 1000;
         setInterval(function(){
             $('#hosts').load('/hosts');
-        }, 2000);
+        }, pollRate );
     </script>
 {% endblock %}

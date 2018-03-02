@@ -8,6 +8,8 @@ class Config(object):
     BETTERCAP_URL = os.environ.get('BETTERCAP_URL') or 'https://localhost:8083'
     BETTERCAP_USERNAME = os.environ.get('BETTERCAP_USERNAME') or 'bcap'
     BETTERCAP_PASSWORD = os.environ.get('BETTERCAP_PASSWORD') or 'bcap'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+    BETTERCAP_SESSION = os.environ.get('BETTERCAP_SESSION') or None
+    NABUI_POLL_RATE = os.environ.get('NABUI_POLL_RATE') or 20
+    SQLALCHEMY_DATABASE_URI = os.environ.get('NABUI_DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'bettercap.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False

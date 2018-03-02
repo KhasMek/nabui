@@ -19,8 +19,9 @@
             </table>
         </div>
         <script>
+            var pollRate = '{{ config.NABUI_POLL_RATE }}' * 1000;
             setInterval(function(){
                 $('#traffic').load('/traffic');
-            }, 2000);
+            }, pollRate);
         </script>
 {% endblock %}
